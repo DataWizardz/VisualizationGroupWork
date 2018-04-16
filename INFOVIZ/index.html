@@ -23,13 +23,10 @@
 	<div id='map'></div>
 	<script>
 
-		var map = L.map('map', { crs: L.CRS.EPSG4326 }).setView([-108.619726, 45.000284], 13);
-		var countriesLayer = L.geoJson(states, {
+		let map = L.map('map', { crs: L.CRS.EPSG4326 }).setView([-108.619726, 45.000284], 13);
+		let countriesLayer = L.geoJson(states, {
 			onEachFeature: (feature, layer) => {
-				console.log(layer.getBounds().getCenter(), feature.properties.NAME)
-				let c_coords = layer.getBounds().getCenter()
-
-				let label = L.marker(c_coords, {
+				let label = L.marker(layer.getBounds().getCenter(), {
 					icon: L.divIcon({
 						className: 'label',
 						html: feature.properties.NAME,
