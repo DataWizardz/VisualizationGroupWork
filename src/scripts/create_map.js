@@ -19,17 +19,38 @@ let statesStyle = feature => {
     fillOpacity: 0.7
   }
 }
+let highlightState = e => {
+  var layer = e.target
+
+  layer.setStyle({
+    weight: 3,
+    color: 'black',
+    dashArray: '',
+    fillOpacity: 0.5
+  })
+
+  layer.bringToFront()
+  info.update(layer.feature.properties)
+}
+let resetHighlight = e => {
+  countriesLayer.resetStyle(e.target)
+  info.update()
+}
+let zoomToState = e => {
+  map.fitBounds(e.target.getBounds())
+}
 let map = L.map('map').setView([-108.619726, 45.000284], 13)
 let countriesLayer = L.geoJson(states, {
   style: statesStyle,
   /*
-      Adds an icon containing state name on each polygon center
+      Adds an icon containing state name and another icon containing state abbreviation on each polygon center
   
       Turf centroid solution (Doesnt work ????????)
       turf.center(turf.multiPolygon(feature.geometry.coordinates)).geometry.coordinates
       */
   onEachFeature: (feature, layer) => {
     let label = L.marker(layer.getBounds().getCenter(), {
+      interactive: false,
       icon: L.divIcon({
         className: 'label',
         html: feature.properties.ABBR,
@@ -37,12 +58,22 @@ let countriesLayer = L.geoJson(states, {
       })
     }).addTo(map)
     let full_label = L.marker(layer.getBounds().getCenter(), {
+      interactive: false,
       icon: L.divIcon({
         className: 'name',
         html: feature.properties.NAME,
         iconSize: [0, 0]
       })
     }).addTo(map)
+    /*
+      Add an mouse-over listener on each state polygon
+    */
+    layer.on({
+      mouseover: highlightState,
+      mouseout: resetHighlight,
+      click: zoomToState
+    })
   }
 }).addTo(map)
+
 map.fitBounds(countriesLayer.getBounds())

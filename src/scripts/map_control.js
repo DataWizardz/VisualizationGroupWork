@@ -13,7 +13,6 @@ map.eachLayer(layer => {
   }
 })
 
-console.log(icons)
 show_label_zoom = 4
 show_name_zoom = 6
 let labels_visible = false
