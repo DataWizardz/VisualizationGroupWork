@@ -10,7 +10,7 @@
 	<!--Leaflet-->
 	<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
 	<script src="lib/leaflet/leaflet.js"></script>
-	<script src="../states_votes.geojson"></script>
+	<script src="data/states_edited.geojson"></script>
 	<style type="text/css">
 		#map {
 			height: 400px;
@@ -22,9 +22,32 @@
 	<h1>My Map</h1>
 	<div id='map'></div>
 	<script>
+		let getStateColor = (vote_perc_dem, vote_perc_rep) => {
+			if (vote_perc_dem > vote_perc_rep) {
+				return 'blue';
+			} else if (vote_perc_dem < vote_perc_rep) {
+				return 'red';
+			}
+		}
 
+		let statesStyle = (feature) => {
+			return {
+
+				fillColor: getStateColor(feature.properties.dem_perc, feature.properties.rep_perc),
+				weight: 2,
+				opacity: 1,
+				color: 'white',
+				dashArray: 3,
+				fillOpacity: 0.7
+
+			}
+		}
 		let map = L.map('map', { crs: L.CRS.EPSG4326 }).setView([-108.619726, 45.000284], 13);
 		let countriesLayer = L.geoJson(states, {
+			style: statesStyle,
+			/*
+			Adds an icon containing state name on each polygon center
+			*/
 			onEachFeature: (feature, layer) => {
 				let label = L.marker(layer.getBounds().getCenter(), {
 					icon: L.divIcon({
@@ -36,6 +59,8 @@
 			}
 		}).addTo(map);
 		map.fitBounds(countriesLayer.getBounds());
+
+
 	</script>
 </body>
 
