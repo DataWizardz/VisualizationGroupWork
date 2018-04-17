@@ -1,4 +1,4 @@
-let countries =  {
+let states =  {
   type: 'FeatureCollection',
   features: [
     {
