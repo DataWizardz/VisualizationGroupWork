@@ -1,10 +1,18 @@
 let getStateColor = (vote_perc_dem, vote_perc_rep) => {
   if (vote_perc_dem > vote_perc_rep) {
+    if (vote_perc_dem > vote_perc_rep + 5){
+      return '#000080'
+    }
     return 'blue'
+
   } else if (vote_perc_dem < vote_perc_rep) {
-    return 'red'
+      if (vote_perc_rep > vote_perc_dem + 5){
+        return '#ff0000'
+      }
+    return '#ff4d4d'
   }
 }
+
 
 let statesStyle = feature => {
   return {
