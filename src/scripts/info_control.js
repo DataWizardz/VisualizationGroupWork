@@ -11,6 +11,13 @@ info.update = function(properties) {
     '<h4>Vote Distribution</h4>' +
     (properties
       ? '<b>' +
+        '</b>' + 
+        'Electoral Votes : ' +
+        '<b>' +
+        properties.electoral_votes +
+        '</b>' +
+        '<br>' +
+        '<b>' +
         properties.dem_perc +
         '%</b> Democrat votes<br />' +
         '<b>' +
