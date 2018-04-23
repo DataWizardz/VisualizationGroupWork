@@ -60,27 +60,3 @@ legend_elec.onAdd = map => {
   return div
 }
 legend_base.addTo(map)
-
-/*
-var populationLegend = L.control({position: 'bottomright'});
-var populationChangeLegend = L.control({position: 'bottomright'});
-
-populationLegend.onAdd = function (map) {
-var div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML +=
-    '<img src="legend.png" alt="legend" width="134" height="147">';
-return div;
-};
-
-populationChangeLegend.onAdd = function (map) {
-var div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML +=
-    '<img src="change_legend.png" alt="legend" width="134" height="147">';
-return div;
-};
-
-// Add this one (only) for now, as the Population layer is on by default
-populationLegend.addTo(map);
-
-
-*/
