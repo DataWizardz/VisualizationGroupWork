@@ -1,18 +1,16 @@
 let getStateColor = (vote_perc_dem, vote_perc_rep) => {
   if (vote_perc_dem > vote_perc_rep) {
-    if (vote_perc_dem > vote_perc_rep + 5){
+    if (vote_perc_dem > vote_perc_rep + 5) {
       return '#000080'
     }
     return 'blue'
-
   } else if (vote_perc_dem < vote_perc_rep) {
-      if (vote_perc_rep > vote_perc_dem + 5){
-        return '#ff0000'
-      }
+    if (vote_perc_rep > vote_perc_dem + 5) {
+      return '#ff0000'
+    }
     return '#ff4d4d'
   }
 }
-
 
 let statesStyle = feature => {
   return {
@@ -57,22 +55,35 @@ let countriesLayer = L.geoJson(states, {
       turf.center(turf.multiPolygon(feature.geometry.coordinates)).geometry.coordinates
       */
   onEachFeature: (feature, layer) => {
-    let label = L.marker(layer.getBounds().getCenter(), {
-      interactive: false,
-      icon: L.divIcon({
-        className: 'label',
-        html: feature.properties.ABBR,
-        iconSize: [0, 0]
-      })
-    }).addTo(map)
-    let full_label = L.marker(layer.getBounds().getCenter(), {
-      interactive: false,
-      icon: L.divIcon({
-        className: 'name',
-        html: feature.properties.NAME,
-        iconSize: [0, 0]
-      })
-    }).addTo(map)
+    let label = L.marker(
+      L.latLng({
+        lat: feature.properties.state_coordinates[0],
+        lng: -feature.properties.state_coordinates[1]
+      }),
+      {
+        interactive: false,
+        icon: L.divIcon({
+          className: 'label',
+          html: feature.properties.ABBR,
+          iconSize: [0, 0]
+        })
+      }
+    ).addTo(map)
+
+    let full_label = L.marker(
+      L.latLng({
+        lat: feature.properties.state_coordinates[0],
+        lng: -feature.properties.state_coordinates[1]
+      }),
+      {
+        interactive: false,
+        icon: L.divIcon({
+          className: 'name',
+          html: feature.properties.NAME,
+          iconSize: [0, 0]
+        })
+      }
+    ).addTo(map)
     /*
       Add an mouse-over listener on each state polygon
     */
