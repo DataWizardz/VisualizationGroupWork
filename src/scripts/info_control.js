@@ -5,13 +5,12 @@ info.onAdd = function(map) {
   this.update()
   return this._div
 }
-
 info.update = function(properties) {
   this._div.innerHTML =
     '<h4>Vote Distribution</h4>' +
     (properties
       ? '<b>' +
-        '</b>' + 
+        '</b>' +
         'Electoral Votes : ' +
         '<b>' +
         properties.electoral_votes +

@@ -22,37 +22,38 @@ let statesStyle = feature => {
     opacity: 1,
     color: 'white',
     dashArray: 3,
-    fillOpacity: 0.7
+    fillOpacity: 0.7,
+    className: 'states'
   }
 }
 let highlightState = e => {
   var layer = e.target
-
+  layer.bringToFront()
+  info.update(layer.feature.properties)
   layer.setStyle({
     weight: 3,
     color: 'black',
     dashArray: '',
     fillOpacity: 0.5
   })
-
-  layer.bringToFront()
-  info.update(layer.feature.properties)
 }
 let resetHighlight = e => {
-  countriesLayer.resetStyle(e.target)
   info.update()
+  if (e.target.options.className === 'elec') {
+    e.target.setStyle(elecStyle(e.target.feature))
+    return
+  }
+  countriesLayer.resetStyle(e.target)
 }
 let zoomToState = e => {
   map.fitBounds(e.target.getBounds())
 }
 let map = L.map('map').setView([-108.619726, 45.000284], 13)
 let countriesLayer = L.geoJson(states, {
+  className: 'base',
   style: statesStyle,
   /*
       Adds an icon containing state name and another icon containing state abbreviation on each polygon center
-  
-      Turf centroid solution (Doesnt work ????????)
-      turf.center(turf.multiPolygon(feature.geometry.coordinates)).geometry.coordinates
       */
   onEachFeature: (feature, layer) => {
     let label = L.marker(
