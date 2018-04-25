@@ -56,6 +56,7 @@ let countriesLayer = L.geoJson(states, {
       Adds an icon containing state name and another icon containing state abbreviation on each polygon center
       */
   onEachFeature: (feature, layer) => {
+    
     let label = L.marker(
       L.latLng({
         lat: feature.properties.state_coordinates[0],
