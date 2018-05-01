@@ -8,6 +8,7 @@ body,
 #map {
   height: 100%;
   width: 100%;
+  background: slategrey;
 }
 
 .info {
@@ -18,7 +19,16 @@ body,
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
-
+.label {
+  color: snow;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font: 900;
+}
+.name {
+  color: snow;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font: 600 Arial, Helvetica, sans-serif;
+}
 .info h4 {
   margin: 0 0 5px;
   color: #777;
