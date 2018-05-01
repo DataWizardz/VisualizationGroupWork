@@ -25,8 +25,8 @@ let statesStyle = feature => {
     ),
     weight: 2,
     opacity: 1,
-    color: 'darkgray',
-    dashArray: 4,
+    color: 'white',
+    dashArray: 3,
     fillOpacity: 0.7,
     className: 'states'
   }
