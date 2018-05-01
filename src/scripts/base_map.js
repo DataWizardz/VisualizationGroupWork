@@ -45,6 +45,18 @@ let resetHighlight = e => {
   }
   countriesLayer.resetStyle(e.target)
 }
+
+function whenClicked(e) {
+  // e = event
+  console.log(e['target']['feature']['properties']['pop_votes']);
+  var popup = L.popup()
+    .setLatLng([e['target']['feature']['properties']['state_coordinates'][0], -e['target']['feature']['properties']['state_coordinates'][1]]) 
+    .setContent("<b><dt>State : " + e['target']['feature']['properties']['NAME'] + "</dt></b>"  + "Donald Trump : " + "<b>" + e['target']['feature']['properties']['pop_votes'][0] + "</b>" 
+               + "<br>" + "Hillary Clinton : " + "<b>" + e['target']['feature']['properties']['pop_votes'][1] + "</b>" )
+    .openOn(map);
+
+}
+
 let zoomToState = e => {
   map.fitBounds(e.target.getBounds())
 }
@@ -92,7 +104,7 @@ let countriesLayer = L.geoJson(states, {
     layer.on({
       mouseover: highlightState,
       mouseout: resetHighlight,
-      click: zoomToState
+      click: whenClicked
     })
   }
 }).addTo(map)
