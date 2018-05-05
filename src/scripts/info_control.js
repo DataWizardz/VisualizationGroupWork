@@ -1,7 +1,6 @@
-var info = L.control()
+let info = L.control()
 info.onAdd = function(map) {
   this._div = L.DomUtil.create('div', 'info')
-  console.log(this._div)
   this.update()
   return this._div
 }

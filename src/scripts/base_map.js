@@ -1,7 +1,4 @@
-let maxBounds = [
-  [13.49955, -150], //Southwest
-  [74, -43.23304] //
-]
+let maxBounds = [[13.49955, -150], [74, -43.23304]]
 
 let getStateColor = (vote_perc_dem, vote_perc_rep) => {
   if (vote_perc_dem > vote_perc_rep) {
@@ -53,7 +50,6 @@ let resetHighlight = e => {
 
 function whenClicked(e) {
   // e = event
-  console.log(e['target']['feature']['properties']['pop_votes'])
   var popup = L.popup()
     .setLatLng([
       e['target']['feature']['properties']['state_coordinates'][0],
